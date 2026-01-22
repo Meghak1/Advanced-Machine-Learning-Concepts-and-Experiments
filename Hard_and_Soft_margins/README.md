@@ -62,15 +62,15 @@ python soft_margin_c10.py
 
 ##  Experiments Included
 
-### ✅ Hard Margin SVM
+### Hard Margin SVM
 
 * Uses linearly separable data.
 ### Linearly Seperable Data
 
 
-```markdown
+
 ![Linearly Seperable Data](outputs/Linear_data.png)
-```
+
 
 * Large value of **C = 1e6**.
 * Produces maximum margin without misclassification.
@@ -90,27 +90,27 @@ python soft_margin_c10.py
 
 ### Hard Margin Output
 
-```markdown
+
 ![Hard Margin](outputs/Hardmargin.png)
-```
+
 
 ### Soft Margin C = 0.1
 
-```markdown
+
 ![Soft Margin C=0.1](outputs/soft_margin_c01.png)
-```
+
 
 ### Soft Margin C = 1
 
-```markdown
+
 ![Soft Margin C=1](outputs/soft_margin_c1.png)
-```
+
 
 ### Soft Margin C = 10
 
-```markdown
+
 ![Soft Margin C=10](outputs/soft_margin_c10.png)
-```
+
 ---
 ## Observations
 
