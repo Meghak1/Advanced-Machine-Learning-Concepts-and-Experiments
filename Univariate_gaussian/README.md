@@ -1,0 +1,3 @@
+univariate
+multivariate
+gaussian mixture model
