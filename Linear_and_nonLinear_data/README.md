@@ -1,153 +1,186 @@
-# Advanced Machine Learning – Kernel Methods
+![Image Title](outputs/image_name.png)
 
-This repository demonstrates core concepts behind **Advanced Machine Learning**, with a strong focus on **linearity, non-linearity, and kernel methods**, particularly in the context of **Support Vector Machines (SVMs)**.
 
-The goal of this project is to build an intuitive and practical understanding of *why* linear models fail on certain datasets and *how* kernel methods allow us to overcome these limitations without abandoning linear learning algorithms.
+# Linear vs Non-Linear Classification (Logistic Regression & SVM)
 
----
+## Overview
 
-## Motivation
+This project demonstrates the difference between **linear** and **non-linear** classification using:
 
-Many classical machine learning models assume that the relationship between input features and the output is **linear**. While this assumption simplifies learning and interpretation, real-world data often violates it. Understanding when linear models work, when they fail, and how to extend them to handle non-linear patterns is a fundamental step toward advanced machine learning.
-
-This repository explores these ideas using synthetic datasets and visualizations, culminating in the use of **kernelized SVMs** to solve non-linearly separable problems.
-
----
-
-## Linearity
-
-**Linearity** means that the relationship between input features and the output can be represented using a straight line (or a flat surface in higher dimensions).
-
-* Increasing or decreasing an input feature affects the output in a **proportional and predictable** way.
-* For classification, this implies that classes can be separated by:
-
-  * a straight line in 2D
-  * a plane in 3D
-  * a hyperplane in higher dimensions
-
-Examples of linear models include:
-
-* Linear Regression
 * Logistic Regression
-* Linear Support Vector Machines (SVMs)
+* Logistic Regression with Polynomial Features
+* Support Vector Machine (SVM)
 
-These models work well **only when the underlying structure of the data is linearly separable**.
+  * Linear Kernel
+  * Polynomial Kernel
+  * RBF Kernel
 
----
+The project uses **synthetic datasets**:
 
-## Non-Linearity
+* Linearly separable data
+* XOR (non-linearly separable) data
 
-**Non-linearity** arises when the relationship between inputs and outputs cannot be captured by a straight line.
-
-* The influence of one feature may depend on the value of another
-* Decision boundaries may be curved or more complex
-* No single straight line can correctly separate the classes
-
-A classic example is the **XOR problem**, where data points from different classes are arranged diagonally. In this case:
-
-* Linear models completely fail
-* No linear boundary can separate the classes correctly
-
-This highlights a critical limitation of purely linear approaches.
+The goal is to show **why linear models fail on non-linear data** and how **feature transformation and kernel methods solve this problem**.
 
 ---
 
-## Why Linear Models Fail on Non-Linear Data
-
-Linear models lack the **capacity** to bend or adapt their decision boundaries.
-
-When data is non-linear:
-
-* Linear classifiers underfit
-* Increasing training time or tuning parameters does not help
-* The model simply cannot represent the required decision surface
-
-To solve this, we need a way to **enrich the feature representation** of the data.
-
----
-
-## Kernel Methods: The Key Idea
-
-Instead of abandoning linear models entirely, kernel methods allow us to **extend them intelligently**.
-
-The core idea is:
-
-> Transform the original data into a higher-dimensional feature space where a linear separator *does* exist.
-
-Key points:
-
-* The transformation is **implicit**, not computed explicitly
-* Linear models are still used in the transformed space
-* The resulting decision boundary becomes **non-linear** in the original space
-
-Support Vector Machines (SVMs) achieve this using **kernel functions**.
-
----
-
-## Kernels and Geometry
-
-A **kernel** defines how similarity between data points is measured.
-
-By choosing different kernels, we:
-
-* Change the geometry of the feature space
-* Alter how distances and similarities are computed
-* Enable linear separation of previously non-linear patterns
-
-Common kernels explored in this repository include:
-
-* **Linear Kernel** – fails on non-linear data
-* **Polynomial Kernel** – captures feature interactions
-* **RBF (Gaussian) Kernel** – highly flexible and powerful
-
-Although the SVM learns a linear boundary in the transformed space, this boundary corresponds to a **curved, non-linear boundary** in the original input space.
-
----
-
-## Learning Process Summary
-
-The workflow demonstrated in this repository follows a clear conceptual progression:
-
-1. Understand whether the data is **linear or non-linear**
-2. Observe how **linear models fail** on non-linear patterns
-3. Apply **kernel methods** to transform the data
-4. Achieve **linear separability in a higher-dimensional space**
-
-This is the core idea behind kernelized SVMs.
-
----
-
-##  Repository Structure
+## Folder Structure
 
 ```
-lab1/
-├── data_generation.py         # Synthetic data generators (linear, XOR)
-├── visualization.py           # 2D plotting utilities
-├── kernel_methods.py          # Linear vs kernel SVM vs polynomial SVM experiments
-├── visualising_linear_data.py # to visualise Linearly seperable data
-├── visualization.py           # to visualise Linear data
-├── XOR_data_visualization.py  # to visualise/ see non linearly seperable data
-├── README.md
+main-folder/
+│
+├── data_generation.py        # Functions to generate linear and XOR data
+├── visualization.py          # Function to plot 2D data
+├── visualising_linear_data.py # to visulaise linear data
+├── linear_data_demo.py       # Visualizes linearly separable data
+├── xor_logistic_demo.py      # Logistic regression on XOR data
+├── xor_svm_demo.py           # SVM with different kernels on XOR data
+│
+├── outputs/                  # Saved output images
+│   ├── linear_data.png
+│   ├── xor_original.png
+│   ├── xor_logistic_linear.png
+│   ├── xor_logistic_poly.png
+│   ├── xor_svm_linear.png
+│   ├── xor_svm_poly.png
+│   └── xor_svm_rbf.png
+│
+└── README.md
 ```
 
 ---
 
-## Learning Outcomes
+## Data Generation
 
-By working through this repository, you will:
+### Linear Data
 
-* Develop intuition about linear vs non-linear data
-* Understand why linear models have fundamental limits
-* Learn how kernel methods overcome these limits
-* Gain hands-on experience with SVM kernels and visualization
+* Generated using a simple linear rule
+* Classes can be separated using a straight line
+
+![Linear Data](outputs/linear_data.png)
+
+### XOR Data
+
+* Generated using the XOR condition
+* Not linearly separable
+* Requires non-linear decision boundaries
+
+![XOR Original](outputs/xor_data.png)
+
+---
+
+## Results and Outputs
+
+### 1. Linearly Separable Data
+
+This dataset can be classified easily using linear models.
+
+![Linear Data](outputs/linear_data.png)
+
+---
+
+### 2. XOR Data (Original Space)
+
+The XOR data cannot be separated by a straight line.
+
+![XOR Original](outputs/xor_data.png)
+
+---
+
+## Logistic Regression Results
+
+### Logistic Regression (Without Feature Transformation)
+
+* Uses a linear decision boundary
+* Fails on XOR data
+
+Accuracy is low because the data is non-linear.
+
+![Logistic Linear XOR](outputs/logistic_linear_xor.png)
+
+---
+
+### Logistic Regression with Polynomial Features
+
+* Transforms data into higher-dimensional space
+* Linear model can now separate the data
+
+Accuracy improves significantly.
+
+![Logistic Polynomial XOR](outputs/logistic_poly_xor.png)
+
+---
+
+## Support Vector Machine (SVM) Results
+
+### Linear Kernel SVM
+
+* Similar to linear logistic regression
+* Fails on XOR data
+
+![Linear SVM XOR](outputs/logistic_linear_xor.png)
+
+---
+
+### Polynomial Kernel SVM
+
+* Uses polynomial kernel
+* Successfully separates XOR data
+
+![Polynomial SVM XOR](outputs/logistic_poly_xor.png)
+
+---
+
+### RBF Kernel SVM
+
+* Uses radial basis function kernel
+* Creates flexible non-linear boundaries
+* Performs very well on XOR data
+
+![RBF SVM XOR](outputs/svm_rbf_xor.png)
+
+---
+
+## Key Takeaways
+
+* Linear models work only for linearly separable data
+* XOR data is non-linearly separable
+* Polynomial features allow linear models to handle non-linear data
+* Kernel SVMs handle non-linear data efficiently without manual feature transformation
+
+---
+
+## Requirements
+
+* Python 3.x
+* NumPy
+* Matplotlib
+* scikit-learn
+
+---
+
+## How to Run
+
+1. Install dependencies:
+
+```
+pip install numpy matplotlib scikit-learn
+```
+
+2. Run the demo scripts:
+
+```
+python app.py
+
+or
+
+python linear_data_demo.py
+python xor_logistic_demo.py
+python xor_svm_demo.py
+```
 
 ---
 
 ## Conclusion
 
-Kernel methods provide a powerful bridge between simplicity and flexibility. They allow us to retain the mathematical elegance of linear models while extending their applicability to complex, real-world patterns.
-
-This repository serves as a practical and conceptual guide to understanding that bridge.
-
----
-
+This project clearly shows why **non-linear problems need non-linear solutions** and how **feature engineering and kernel methods** solve classification challenges.
